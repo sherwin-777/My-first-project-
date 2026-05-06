@@ -1,30 +1,107 @@
-print("....simple calculator....")
-while True:
-  print("1.addition")
-  print("2.subtraction")
-  print("3.multiplication")
-  print("4.division")
-  print("0.exit")
-  choice=input("enter your choice from 0-4=")
-  if choice=="0":
-    print("exiting calculator")
-    break
-  num1=float(input("enter first number="))
-  num2=float(input("enter second number="))
-  if choice=="1":
-    result=num1+num2
-    print("result:",result)
-  elif choice=="2":
-    result=num1-num2
-    print("result:",result)
-  elif choice=="3":
-    result=num1*num2
-    print("result:",result)
-  elif choice=="4":
-    if num2!=0:
-      result=num1/num2
-      print("result:",result)
-    else:
-      print("number cannot be divided by zero")
-  else:
-    print("invalid choice")
+import math
+import sys
+
+class Calculator:
+    def __init__(self):
+        self.history = []
+
+    def add_history(self, expression, result):
+        self.history.append(f"{expression} = {result}")
+
+    def show_history(self):
+        if not self.history:
+            print("No history yet.")
+        else:
+            print("\n--- Calculation History ---")
+            for item in self.history:
+                print(item)
+
+    def add(self, a, b):
+        return a + b
+
+    def subtract(self, a, b):
+        return a - b
+
+    def multiply(self, a, b):
+        return a * b
+
+    def divide(self, a, b):
+        if b == 0:
+            return "Error: Division by zero"
+        return a / b
+
+    def power(self, a, b):
+        return a ** b
+
+    def sqrt(self, a):
+        if a < 0:
+            return "Error: Negative number"
+        return math.sqrt(a)
+
+    def run(self):
+        print("\n==== PRO CALCULATOR ====")
+
+        while True:
+            print("\n1. Add")
+            print("2. Subtract")
+            print("3. Multiply")
+            print("4. Divide")
+            print("5. Power")
+            print("6. Square Root")
+            print("7. View History")
+            print("0. Exit")
+
+            choice = input("Enter choice: ")
+
+            if choice == "0":
+                print("Exiting... Goodbye!")
+                sys.exit()
+
+            elif choice == "7":
+                self.show_history()
+
+            elif choice in ["1", "2", "3", "4", "5"]:
+                try:
+                    a = float(input("Enter first number: "))
+                    b = float(input("Enter second number: "))
+                except ValueError:
+                    print("Invalid input!")
+                    continue
+
+                if choice == "1":
+                    result = self.add(a, b)
+                    self.add_history(f"{a} + {b}", result)
+
+                elif choice == "2":
+                    result = self.subtract(a, b)
+                    self.add_history(f"{a} - {b}", result)
+
+                elif choice == "3":
+                    result = self.multiply(a, b)
+                    self.add_history(f"{a} * {b}", result)
+
+                elif choice == "4":
+                    result = self.divide(a, b)
+                    self.add_history(f"{a} / {b}", result)
+
+                elif choice == "5":
+                    result = self.power(a, b)
+                    self.add_history(f"{a} ^ {b}", result)
+
+                print("Result:", result)
+
+            elif choice == "6":
+                try:
+                    a = float(input("Enter number: "))
+                    result = self.sqrt(a)
+                    self.add_history(f"√{a}", result)
+                    print("Result:", result)
+                except ValueError:
+                    print("Invalid input!")
+
+            else:
+                print("Invalid choice!")
+
+if __name__ == "__main__":
+    calc = Calculator()
+    calc.run()
