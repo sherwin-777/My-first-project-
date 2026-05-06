@@ -1,0 +1,30 @@
+print("....simple calculator....")
+while True:
+  print("1.addition")
+  print("2.subtraction")
+  print("3.multiplication")
+  print("4.division")
+  print("0.exit")
+  choice=input("enter your choice from 0-4=")
+  if choice=="0":
+    print("exiting calculator")
+    break
+  num1=float(input("enter first number="))
+  num2=float(input("enter second number="))
+  if choice=="1":
+    result=num1+num2
+    print("result:",result)
+  elif choice=="2":
+    result=num1-num2
+    print("result:",result)
+  elif choice=="3":
+    result=num1*num2
+    print("result:",result)
+  elif choice=="4":
+    if num2!=0:
+      result=num1/num2
+      print("result:",result)
+    else:
+      print("number cannot be divided by zero")
+  else:
+    print("invalid choice")
